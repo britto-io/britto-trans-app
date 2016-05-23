@@ -1,9 +1,4 @@
-import java.util.TimeZone
-
-//import _root_.sbtbuildinfo.Plugin.BuildInfoKey
-//import _root_.sbtbuildinfo.Plugin._
 import com.typesafe.sbt.SbtNativePackager.autoImport._
-import com.typesafe.sbt.packager.archetypes.JavaAppPackaging.autoImport._
 import com.typesafe.sbt.packager.debian.DebianPlugin.autoImport._
 import com.typesafe.sbt.packager.linux.LinuxPlugin.autoImport._
 import com.typesafe.sbt.packager.archetypes.ServerLoader
@@ -13,7 +8,9 @@ name := """simple-app"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
+lazy val root = (project in file("."))
+  .enablePlugins(PlayJava)
+  .enablePlugins(DockerPlugin)
 
 scalaVersion := "2.11.7"
 
@@ -23,10 +20,8 @@ libraryDependencies ++= Seq(
   javaWs
 )
 
-// fork in run := true
-
 ///////////////////////////////////
-// PACKAGING
+// DEBIAN PACKAGING
 ///////////////////////////////////
 
 //debian package required setting
@@ -56,5 +51,13 @@ val packageDeb = taskKey[File]("package-deb")
 //include conf directory for run
 unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile  / "conf"
 
-//scriptClasspath += "../conf"
-//bashScriptExtraDefines += """declare -r risk_service_classpath="/etc/risk-service:$app_classpath""""
+///////////////////////////////////
+// DOCKER PACKAGING
+///////////////////////////////////
+packageName in Docker := name.value
+
+version in Docker := name.value
+
+mappings in Docker := mappings.value
+
+maintainer in Docker := maintainer.value
