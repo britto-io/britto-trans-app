@@ -58,6 +58,6 @@ packageName in Docker := name.value
 
 version in Docker := name.value
 
-mappings in Docker := mappings.value
+//mappings in Docker := mappings.value
 
 maintainer in Docker := maintainer.value
