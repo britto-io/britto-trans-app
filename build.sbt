@@ -2,6 +2,7 @@ import com.typesafe.sbt.SbtNativePackager.autoImport._
 import com.typesafe.sbt.packager.debian.DebianPlugin.autoImport._
 import com.typesafe.sbt.packager.linux.LinuxPlugin.autoImport._
 import com.typesafe.sbt.packager.archetypes.ServerLoader
+import com.typesafe.sbt.packager.docker._
 
 
 name := """simple-app"""
@@ -55,9 +56,18 @@ unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile
 // DOCKER PACKAGING
 ///////////////////////////////////
 packageName in Docker := name.value
-
 version in Docker := name.value
-
-//mappings in Docker := mappings.value
-
 maintainer in Docker := maintainer.value
+
+dockerCommands := Seq()
+dockerCommands := Seq(
+	Cmd("FROM", "dockerfile/java:latest"),
+	Cmd("MAINTAINER", maintainer.value),
+	Cmd("WORKDIR", "/opt/docker"),
+	Cmd("ADD", "opt", "/opt"),
+	Cmd("RUN", "chown", "-R", "daemon:daemon", "."),
+	Cmd("USER", "daemon"),
+	Cmd("ENTRYPOINT", "bin/simple-app", "-Dhttp.port=8080"),
+	Cmd("CMD", "")
+)
+
