@@ -59,5 +59,6 @@ packageName in Docker := name.value
 version in Docker := version.value
 maintainer in Docker := maintainer.value
 
+dockerExposedPorts := Seq(8080)
 dockerEntrypoint := Seq("bin/simple-app", "-Dhttp.port=8080")
 
