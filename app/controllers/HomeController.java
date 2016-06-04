@@ -22,7 +22,8 @@ public class HomeController extends Controller {
 
     public Result status() {
 
-        return ok("Hello World!\n");
+        String systemTime = System.currentTimeMillis() + "";
+        return ok("Hello World " + systemTime + "!\n");
     }
 
 }
