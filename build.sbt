@@ -61,7 +61,7 @@ maintainer in Docker := maintainer.value
 
 dockerCommands := Seq()
 dockerCommands := Seq(
-	Cmd("FROM", "dockerfile/java:latest"),
+	Cmd("FROM", "java:latest"),
 	Cmd("MAINTAINER", maintainer.value),
 	Cmd("WORKDIR", "/opt/docker"),
 	Cmd("ADD", "opt", "/opt"),
