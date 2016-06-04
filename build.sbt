@@ -56,7 +56,7 @@ unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile
 // DOCKER PACKAGING
 ///////////////////////////////////
 packageName in Docker := name.value
-version in Docker := name.value
+version in Docker := version.value
 maintainer in Docker := maintainer.value
 
 dockerEntrypoint := Seq("bin/simple-app", "-Dhttp.port=8080")
