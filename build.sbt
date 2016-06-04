@@ -59,15 +59,5 @@ packageName in Docker := name.value
 version in Docker := name.value
 maintainer in Docker := maintainer.value
 
-dockerCommands := Seq()
-dockerCommands := Seq(
-	Cmd("FROM", "java:latest"),
-	Cmd("MAINTAINER", maintainer.value),
-	Cmd("WORKDIR", "/opt/docker"),
-	Cmd("ADD", "opt", "/opt"),
-	Cmd("RUN", "chown", "-R", "daemon:daemon", "."),
-	Cmd("USER", "daemon"),
-	Cmd("ENTRYPOINT", "bin/simple-app", "-Dhttp.port=8080"),
-	Cmd("CMD", "")
-)
+dockerEntrypoint := Seq("bin/simple-app", "-Dhttp.port=8080")
 
