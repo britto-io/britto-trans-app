@@ -25,17 +25,17 @@ This section describes how to get the application running in the Google Containe
 docker tag [image id] gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT
 
 ## Push the image to google container registry
-gcloud docker push gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT
+`gcloud docker push gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT`
 
 ###  Set the compute zone
-* gcloud config set compute/zone us-central1-b
+`gcloud config set compute/zone us-central1-b`
 
 ### Configure credentials
 `gcloud container clusters get-credentials [cluster name]`
 
 ### Create a pod
+`kubectl run britto-trans-app --image=gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT --port=8080 `
 ``````
-kubectl run britto-trans-app --image=gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT --port=8080 
 kubectl get deployments 
 kubectl get pods 
 kubectl logs <POD-NAME> 
