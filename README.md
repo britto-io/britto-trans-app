@@ -45,8 +45,8 @@ kubectl config view
 ```
 
 ### Setup load balancer
+`kubectl expose deployment britto-trans-app --type="LoadBalancer"`
 
-kubectl expose deployment britto-trans-app --type="LoadBalancer"
 ```
 kubectl get services britto-trans-app
 NAME               CLUSTER-IP     EXTERNAL-IP       PORT(S)    AGE
