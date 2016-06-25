@@ -22,7 +22,7 @@ This section describes how to get the application running in the Google Containe
 `sbt docker:publishLocal`
 
 ### Tag the image for the google container service
-docker tag [image id] gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT
+`docker tag [image id] gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT`
 
 ## Push the image to google container registry
 `gcloud docker push gcr.io/[project id]/britto-trans-app:1.0-SNAPSHOT`
