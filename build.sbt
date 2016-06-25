@@ -5,7 +5,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader
 import com.typesafe.sbt.packager.docker._
 
 
-name := """simple-app"""
+name := """britto-trans-app"""
 
 version := "1.0-SNAPSHOT"
 
@@ -29,17 +29,17 @@ libraryDependencies ++= Seq(
 maintainer := """Todd Fulton <todd@britto.com>"""
 
 //debian package required setting
-packageSummary := "Simple Test Service"
+packageSummary := "Transaction layer application"
 
 //debian package required setting
-packageDescription := """Simple Test Service"""
+packageDescription := """First pass at the transaction layer application."""
 
 //debian package reccomends setting
 debianPackageRecommends in Debian ++= Seq("oracle-java8-installer")
 
-daemonUser in Linux := "simple_app"
+daemonUser in Linux := "trans_app"
 
-daemonGroup in Linux := "simple_app"
+daemonGroup in Linux := "trans_app"
 
 serverLoading in Debian := ServerLoader.Systemd
 
@@ -60,5 +60,5 @@ version in Docker := version.value
 maintainer in Docker := maintainer.value
 
 dockerExposedPorts := Seq(8080)
-dockerEntrypoint := Seq("bin/simple-app", "-Dhttp.port=8080")
+dockerEntrypoint := Seq("bin/britto-trans-app", "-Dhttp.port=8080")
 
