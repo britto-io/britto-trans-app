@@ -21,26 +21,19 @@ libraryDependencies ++= Seq(
   javaWs
 )
 
+unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile  / "conf"
+
 ///////////////////////////////////
 // DEBIAN PACKAGING
 ///////////////////////////////////
-
-//debian package required setting
+packageSummary := "Transaction layer application"
+packageDescription := """First pass at the transaction layer application."""
 maintainer := """Todd Fulton <todd@britto.com>"""
 
-//debian package required setting
-packageSummary := "Transaction layer application"
-
-//debian package required setting
-packageDescription := """First pass at the transaction layer application."""
-
-//debian package reccomends setting
 debianPackageRecommends in Debian ++= Seq("oracle-java8-installer")
 
 daemonUser in Linux := "trans_app"
-
 daemonGroup in Linux := "trans_app"
-
 serverLoading in Debian := ServerLoader.Systemd
 
 // "fake" task key for debian package
@@ -48,9 +41,6 @@ val packageDeb = taskKey[File]("package-deb")
 
 // file location of .deb file
 //packageDeb := (baseDirectory in Compile).value / "target" / (name.value + "_" + version.value + ".deb")
-
-//include conf directory for run
-unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile  / "conf"
 
 ///////////////////////////////////
 // DOCKER PACKAGING
