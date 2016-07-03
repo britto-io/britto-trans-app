@@ -9,9 +9,15 @@ name := """britto-trans-app"""
 
 version := "1.0-SNAPSHOT"
 
+lazy val persistence = RootProject(uri("https://github.com/britto-io/britto-persistence-lib.git"))
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
   .enablePlugins(DockerPlugin)
+  .dependsOn(persistence)
+  .aggregate(persistence)
+  .settings(libraryDependencies ++= Seq()
+  )
 
 scalaVersion := "2.11.7"
 

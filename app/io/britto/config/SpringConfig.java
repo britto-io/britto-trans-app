@@ -1,38 +1,29 @@
-import com.google.inject.AbstractModule;
+package io.britto.config;
 
-import java.time.Clock;
-
-import com.google.inject.Provides;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import io.britto.config.SpringConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.PropertySource;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import services.ApplicationTimer;
-import services.AtomicCounter;
-import services.Counter;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
- * This class is a Guice module that tells Guice how to bind several
- * different types. This Guice module is created when the Play
- * application starts.
- * <p>
- * Play will automatically use any class called `Module` that is in
- * the root package. You can create modules in other locations by
- * adding `play.modules.enabled` settings to the `application.conf`
- * configuration file.
+ * Created by tfulton on 7/3/16.
  */
-public class Module extends AbstractModule {
+//@Singleton
+public class SpringConfig {
 
-    final static Logger logger = LoggerFactory.getLogger(Module.class);
+    final static Logger logger = LoggerFactory.getLogger(SpringConfig.class);
 
     private ClassPathXmlApplicationContext ctx;
 
-    public Module() {
+//    @Inject
+    public SpringConfig() {
+
         System.out.println("*********************************************************************");
         System.out.println("*********************** LOADING SPRING CONFIG ***********************");
         System.out.println("*********************************************************************");
@@ -45,30 +36,13 @@ public class Module extends AbstractModule {
             ctx.start();
 
         } catch (Exception e) {
-            logger.error("Module can not start, halting with error", e);
+            logger.error("Can not start, halting with error", e);
             System.exit(1);
         }
     }
 
-    @Override
-    public void configure() {
-        // Use the system clock as the default implementation of Clock
-        bind(Clock.class).toInstance(Clock.systemDefaultZone());
-        // Ask Guice to create an instance of ApplicationTimer when the
-        // application starts.
-        bind(ApplicationTimer.class).asEagerSingleton();
-        // Set AtomicCounter as the implementation for Counter.
-        bind(Counter.class).to(AtomicCounter.class);
-    }
-
-    @Provides
-    public JedisConnectionFactory getJedisConnectionFactory() {
-        return (JedisConnectionFactory) ctx.getBean("jedisConnectionFactory");
-    }
-
-    @Provides
     public StringRedisTemplate getRedisTemplate() {
-        return (StringRedisTemplate) ctx.getBean("redisTemplate");
+        return (StringRedisTemplate)ctx.getBean("redisTemplate");
     }
 
     private class TypesafeConfigPropertySource extends PropertySource<String> {
@@ -90,5 +64,4 @@ public class Module extends AbstractModule {
             }
         }
     }
-
 }
