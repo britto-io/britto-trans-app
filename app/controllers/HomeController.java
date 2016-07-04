@@ -35,8 +35,6 @@ public class HomeController extends Controller {
 
     public Result status() {
 
-//        StringRedisTemplate redisTemplate = springConfig.getRedisTemplate();
-
         String systemTime = System.currentTimeMillis() + "";
 
         String key = "myMessage";
