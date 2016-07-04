@@ -2,10 +2,12 @@ import com.google.inject.AbstractModule;
 
 import java.time.Clock;
 
+import com.google.inject.ProvidedBy;
 import com.google.inject.Provides;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.britto.config.SpringConfig;
+import io.britto.persistence.TransactionPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -69,6 +71,11 @@ public class Module extends AbstractModule {
     @Provides
     public StringRedisTemplate getRedisTemplate() {
         return (StringRedisTemplate) ctx.getBean("redisTemplate");
+    }
+
+    @Provides
+    public TransactionPersistence getTransactionPersistence() {
+        return (TransactionPersistence) ctx.getBean("transactionPersistence");
     }
 
     private class TypesafeConfigPropertySource extends PropertySource<String> {

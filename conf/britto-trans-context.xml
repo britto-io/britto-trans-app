@@ -13,15 +13,4 @@
     <!--<context:property-placeholder order="0" ignore-unresolvable="true"/>-->
     <context:property-placeholder location="classpath:application.conf" order="0" ignore-unresolvable="true"/>
 
-    <context:annotation-config/>
-    <context:component-scan base-package="io.britto"></context:component-scan>
-
-    <!--&lt;!&ndash; Jedis ConnectionFactory &ndash;&gt;-->
-    <!--<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"-->
-          <!--p:use-pool="true"/>-->
-
-    <!--&lt;!&ndash; redis template definition &ndash;&gt;-->
-    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"-->
-          <!--p:connection-factory-ref="jedisConnectionFactory"/>-->
-
 </beans>

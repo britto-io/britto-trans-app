@@ -1,14 +1,13 @@
 package controllers;
 
-import com.google.inject.Inject;
-import io.britto.config.SpringConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
 
-import views.html.*;
+import javax.inject.Inject;
 
 /**
  * This controller contains an action to handle HTTP requests

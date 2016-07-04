@@ -9,7 +9,7 @@ name := """britto-trans-app"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val persistence = RootProject(uri("https://github.com/britto-io/britto-persistence-lib.git"))
+lazy val persistence = RootProject(uri("https://github.com/britto-io/britto-persistence-lib.git#1.0.0"))
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   javaWs
 )
 
-unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile  / "conf"
+unmanagedClasspath in Runtime += baseDirectory.value.getParentFile.getParentFile / "conf"
 
 ///////////////////////////////////
 // DEBIAN PACKAGING
