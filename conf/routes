@@ -3,7 +3,7 @@
 # ~~~~
 
 # BRITTO controllers and routes
-POST        /v1/:merchantId/transactions        @io.britto.controllers.TransactionController.createTransaction(merchantId: String)
+POST        /v1/:merchantId/transactions        io.britto.controllers.TransactionController.createTransaction(merchantId: String)
 
 
 # An example controller showing a sample home page
